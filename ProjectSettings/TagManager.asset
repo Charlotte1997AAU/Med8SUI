@@ -6,15 +6,18 @@ TagManager:
   tags:
   - Snapable
   - Snapee
+  - RedWeapon
+  - BlueWeapon
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - RedGrab
+  - 
   - Water
   - UI
-  - BlueGrab
-  - 
+  - BlueWeapon
+  - RedWeapon
   - 
   - 
   - 

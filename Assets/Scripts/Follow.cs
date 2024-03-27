@@ -14,6 +14,8 @@ public class Follow : MonoBehaviour
     {
         transform.position = target.position + Vector3.up * offset.y 
         + Vector3.ProjectOnPlane(target.right, Vector3.up).normalized * offset.x
-        + Vector3.ProjectOnPlane(target.forward, Vector3.up).normalized *offset.z;
+        + Vector3.ProjectOnPlane(target.forward, Vector3.up).normalized *offset.z; 
+
+
     }
 }
