@@ -9,6 +9,14 @@ TagManager:
   - RedWeapon
   - BlueWeapon
   - Bullet
+  - LeftHand
+  - RightHand
+  - RedBullet
+  - BlueBullet
+  - GreenBullet
+  - RedTarget
+  - BlueTarget
+  - GreenTarget
   layers:
   - Default
   - TransparentFX
