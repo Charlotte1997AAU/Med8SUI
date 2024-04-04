@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
 using TMPro;
+using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(InputData))]
 
@@ -13,7 +14,8 @@ public class ButtonInventory : MonoBehaviour
     private bool _rightSecondaryButtonPressed = false;
     private int _currentWeaponIndex = 0; // Current index of the selected weapon
     private GameObject _currentWeaponInstance; // Reference to the current weapon instance
-
+    private Vector3 prevPos;
+    
     public GameObject[] weapons; // Array for the prefabs
 
     public GameObject controllerobj; // Reference to the controller object
@@ -22,6 +24,7 @@ public class ButtonInventory : MonoBehaviour
     private void Start()
     {
         _inputData = GetComponent<InputData>();
+
     }
 
     void Update()
@@ -54,6 +57,13 @@ public class ButtonInventory : MonoBehaviour
             }
         }
 
+        if (_currentWeaponInstance.transform.position != prevPos){
+            Debug.Log("position changed");
+            Rigidbody weaponRigidbody = _currentWeaponInstance.GetComponent<Rigidbody>();
+            weaponRigidbody.isKinematic = false;
+            weaponRigidbody.useGravity = true;
+
+        }
        
    
     }
@@ -82,13 +92,16 @@ public class ButtonInventory : MonoBehaviour
         
         // Instantiate new weapon at the controller's position
         _currentWeaponInstance = Instantiate(weapons[_currentWeaponIndex], controllerPosition, Quaternion.identity);
+        prevPos = _currentWeaponInstance.transform.position;
 
         Rigidbody weaponRigidbody = _currentWeaponInstance.GetComponent<Rigidbody>();
         if (weaponRigidbody != null)
         {
         weaponRigidbody.isKinematic = true;
+        weaponRigidbody.useGravity = false;
          }
         
         Debug.Log("Selected Weapon Index: " + _currentWeaponIndex);
     }
+
 }
