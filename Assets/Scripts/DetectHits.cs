@@ -11,15 +11,13 @@ public class DetectHits : MonoBehaviour
     public int hits;
     public GameObject[] targets; //Array for the prefabs
 
-
-    private int fileCounter = 1; 
     string filename = "";
    
 
     // Start is called before the first frame update
     void Start()
     {
-        filename = Application.dataPath + "/TxtFiles/Timestamps"+fileCounter+".txt";
+        filename = Application.dataPath + "/TxtFiles/Timestamps" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
     }
 
     // Update is called once per frame
@@ -89,7 +87,6 @@ public class DetectHits : MonoBehaviour
         
     }
 
-    fileCounter ++;
 }
 
        
