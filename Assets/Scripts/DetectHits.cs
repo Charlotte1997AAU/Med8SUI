@@ -12,12 +12,10 @@ public class DetectHits : MonoBehaviour
     public GameObject[] targets; //Array for the prefabs
 
     string filename = "";
-
-    private List<float>  timestamps = new List<float>();
    
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         filename = Application.dataPath + "/TxtFiles/Timestamps" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
     }
@@ -34,24 +32,20 @@ public class DetectHits : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
             spawnTarget();
-           
-
         }
 
         if(collision.gameObject.CompareTag("BlueBullet") && gameObject.CompareTag("BlueTarget")){
             hits+=1;
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            spawnTarget();
-       
+            spawnTarget();    
         }
 
         if(collision.gameObject.CompareTag("GreenBullet") && gameObject.CompareTag("GreenTarget")){
             hits+=1;
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            spawnTarget();
-           
+            spawnTarget();   
         }
     }
 
@@ -66,13 +60,12 @@ public class DetectHits : MonoBehaviour
             
             float randomScale = Random.Range(0.35f, 1f);
            
-
             int randomIndex = Random.Range(0, targets.Length);
             GameObject spawnedTarget = Instantiate(targets[randomIndex], randomPosition, Quaternion.identity);
 
             spawnedTarget.transform.localScale = Vector3.one * randomScale;
-            
-            timestamps.Add(Time.time);
+
+            WriteTimestampToFile(Time.time);
            
     
             
@@ -80,26 +73,18 @@ public class DetectHits : MonoBehaviour
 
     }
 
-   void WriteTimestampToFile(List<float> timestamp)
+   void WriteTimestampToFile(float timestamp)
 {
     using (TextWriter tw = new StreamWriter(filename, true))
     {
-        
         tw.WriteLine(timestamp);
         
     }
-    Debug.Log("written to file");
 
 }
 
-       
-    
-
     void OnApplicationQuit(){
-        WriteTimestampToFile(timestamps);
-        
+        Debug.Log("Application Quit");
     }
-
-
-    
+ 
 }
