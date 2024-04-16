@@ -11,13 +11,15 @@ public class DetectHits : MonoBehaviour
     public int hits;
     public GameObject[] targets; //Array for the prefabs
 
+
+    private int fileCounter = 1; 
     string filename = "";
    
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
-        filename = Application.dataPath + "/TxtFiles/Timestamps" + System.DateTime.Now.ToString("yyyyMMdd_HHmmss") + ".txt";
+        filename = Application.dataPath + "/TxtFiles/Timestamps"+fileCounter+".txt";
     }
 
     // Update is called once per frame
@@ -32,20 +34,24 @@ public class DetectHits : MonoBehaviour
             Destroy(collision.gameObject);
             Destroy(gameObject);
             spawnTarget();
+           
+
         }
 
         if(collision.gameObject.CompareTag("BlueBullet") && gameObject.CompareTag("BlueTarget")){
             hits+=1;
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            spawnTarget();    
+            spawnTarget();
+       
         }
 
         if(collision.gameObject.CompareTag("GreenBullet") && gameObject.CompareTag("GreenTarget")){
             hits+=1;
             Destroy(collision.gameObject);
             Destroy(gameObject);
-            spawnTarget();   
+            spawnTarget();
+           
         }
     }
 
@@ -60,6 +66,7 @@ public class DetectHits : MonoBehaviour
             
             float randomScale = Random.Range(0.35f, 1f);
            
+
             int randomIndex = Random.Range(0, targets.Length);
             GameObject spawnedTarget = Instantiate(targets[randomIndex], randomPosition, Quaternion.identity);
 
@@ -77,14 +84,21 @@ public class DetectHits : MonoBehaviour
 {
     using (TextWriter tw = new StreamWriter(filename, true))
     {
+        
         tw.WriteLine(timestamp);
         
     }
 
+    fileCounter ++;
 }
+
+       
+    
 
     void OnApplicationQuit(){
         Debug.Log("Application Quit");
     }
- 
+
+
+    
 }
