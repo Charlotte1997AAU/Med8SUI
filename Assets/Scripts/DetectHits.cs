@@ -12,6 +12,8 @@ public class DetectHits : MonoBehaviour
     public GameObject[] targets; //Array for the prefabs
 
     string filename = "";
+
+    private List<float>  timestamps = new List<float>();
    
 
     // Start is called before the first frame update
@@ -69,8 +71,8 @@ public class DetectHits : MonoBehaviour
             GameObject spawnedTarget = Instantiate(targets[randomIndex], randomPosition, Quaternion.identity);
 
             spawnedTarget.transform.localScale = Vector3.one * randomScale;
-
-            WriteTimestampToFile(Time.time);
+            
+            timestamps.Add(Time.time);
            
     
             
@@ -78,7 +80,7 @@ public class DetectHits : MonoBehaviour
 
     }
 
-   void WriteTimestampToFile(float timestamp)
+   void WriteTimestampToFile(List<float> timestamp)
 {
     using (TextWriter tw = new StreamWriter(filename, true))
     {
@@ -86,6 +88,7 @@ public class DetectHits : MonoBehaviour
         tw.WriteLine(timestamp);
         
     }
+    Debug.Log("written to file");
 
 }
 
@@ -93,7 +96,8 @@ public class DetectHits : MonoBehaviour
     
 
     void OnApplicationQuit(){
-        Debug.Log("Application Quit");
+        WriteTimestampToFile(timestamps);
+        
     }
 
 
