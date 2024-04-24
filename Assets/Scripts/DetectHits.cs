@@ -10,7 +10,7 @@ public class DetectHits : MonoBehaviour
     string filename;
     float startTime;
     bool savingData = false;
-    float saveDelay = 60f; // Time delay before saving data in seconds
+    float saveDelay = 400f; // Time delay before saving data in seconds
 
     // Start is called before the first frame update
     void Start()
