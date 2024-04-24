@@ -1,0 +1,6 @@
+Time between line 1 and line 2: 6.30 seconds
+Time between line 2 and line 3: 6.80 seconds
+Time between line 3 and line 4: 9.76 seconds
+Time between line 4 and line 5: 5.62 seconds
+
+Average time difference: 7.12 seconds
